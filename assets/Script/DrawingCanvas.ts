@@ -2,13 +2,15 @@ import Brush from "./brush/Brush";
 import BasicBrush from "./brush/BasicBrush";
 import BezierBrush from "./brush/BezierBrush";
 import VariableBrush from "./brush/VariableBrush";
+import MultiStrokeBrush from "./brush/MultiStrokeBrush";
 
 const {ccclass, property} = cc._decorator;
 
 enum BrushType {
     Basic,
     Bezier,
-    Variable
+    Variable,
+    MultiStroke
 }
 
 @ccclass
@@ -37,6 +39,10 @@ export default class DrawingCanvas extends cc.Component {
                 this.brush = new VariableBrush();
                 break;
             }
+            case BrushType.MultiStroke: {
+                this.brush = new MultiStrokeBrush();
+                break;
+            }
         }
 
         if(this.graphics == null){
@@ -46,6 +52,7 @@ export default class DrawingCanvas extends cc.Component {
         }
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this, true);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this, true);
+        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this, true);
     }
     start () {
 
@@ -54,7 +61,7 @@ export default class DrawingCanvas extends cc.Component {
     // update (dt) {}
 
     //Event callbacks
-    onTouchStart (event:cc.Event.EventTouch){
+    onTouchStart (event:cc.Event.EventTouch) {
         var loc = event.touch.getLocation();
         loc = this.node.parent.convertToNodeSpaceAR(loc);
 
@@ -62,7 +69,7 @@ export default class DrawingCanvas extends cc.Component {
         return true;
     }
 
-    onTouchMove(event:cc.Event.EventTouch){
+    onTouchMove(event:cc.Event.EventTouch) {
         var loc = event.touch.getLocation();
         loc = this.node.parent.convertToNodeSpaceAR(loc);
 
@@ -70,6 +77,12 @@ export default class DrawingCanvas extends cc.Component {
         
         if(this.brush != null){
             this.brush.draw(this.graphics, this.points);
+        }
+    }
+
+    onTouchEnd(event:cc.Event.EventTouch) {
+        if(this.brush != null) {
+            this.brush.endDraw();
         }
     }
 }

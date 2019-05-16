@@ -7,7 +7,7 @@ export default class BezierBrush extends Brush{
     hasDrawnStart = false;
     draw (g:cc.Graphics, points: cc.Vec2[]) {
         if(!this.hasDrawnStart){
-            let p1 = points[0];
+            let p1 = points[points.length-2];
             g.moveTo(p1.x, p1.y);
             this.hasDrawnStart = true;
         } else {
@@ -18,5 +18,8 @@ export default class BezierBrush extends Brush{
             
             g.stroke();
         }
+    }
+    endDraw(){
+        this.hasDrawnStart = false;
     }
 }
