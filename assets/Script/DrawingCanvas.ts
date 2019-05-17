@@ -3,6 +3,9 @@ import BasicBrush from "./brush/BasicBrush";
 import BezierBrush from "./brush/BezierBrush";
 import VariableBrush from "./brush/VariableBrush";
 import MultiStrokeBrush from "./brush/MultiStrokeBrush";
+import SlicedBrush from "./brush/SlicedBrush";
+import SlicedFadingBrush from "./brush/SlicedFadingBrush";
+import SketchyBrush from "./brush/SketchyBrush";
 
 const {ccclass, property} = cc._decorator;
 
@@ -10,7 +13,10 @@ enum BrushType {
     Basic,
     Bezier,
     Variable,
-    MultiStroke
+    MultiStroke,
+    Sliced,
+    SlicedFading,
+    Sketchy
 }
 
 @ccclass
@@ -41,6 +47,18 @@ export default class DrawingCanvas extends cc.Component {
             }
             case BrushType.MultiStroke: {
                 this.brush = new MultiStrokeBrush();
+                break;
+            }
+            case BrushType.Sliced: {
+                this.brush = new SlicedBrush();
+                break;
+            }
+            case BrushType.SlicedFading: {
+                this.brush = new SlicedFadingBrush();
+                break;
+            }
+            case BrushType.Sketchy: {
+                this.brush = new SketchyBrush();
                 break;
             }
         }
