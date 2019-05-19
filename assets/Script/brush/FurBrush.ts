@@ -3,10 +3,10 @@ import Brush from "./Brush";
 const {ccclass} = cc._decorator;
 
 @ccclass
-export default class SketchyBrush extends Brush{
+export default class FurBrush extends Brush{
     draw (g:cc.Graphics, points: cc.Vec2[]) {
-        let p1 = points[points.length-2];
-        let p2 = points[points.length-1];
+        let p1 = points[points.length - 2];
+        let p2 = points[points.length - 1];
 
         g.lineWidth = 1;
 
@@ -18,11 +18,11 @@ export default class SketchyBrush extends Brush{
             let dx = points[i].x - p2.x;
             let dy = points[i].y - p2.y;
             let d = dx * dx + dy * dy;
-    
-            if (d < 1000) {
+  
+            if (d < 2000 && Math.random() > d / 2000) {
                 g.strokeColor = cc.color(0,0,0,255*0.3);
-                g.moveTo( p2.x + (dx * 0.2), p2.y + (dy * 0.2));
-                g.lineTo( points[i].x - (dx * 0.2), points[i].y - (dy * 0.2));
+                g.moveTo( p2.x + (dx * 0.5), p2.y + (dy * 0.5));
+                g.lineTo( p2.x - (dx * 0.5), p2.y - (dy * 0.5));
                 g.stroke();
             }
         }

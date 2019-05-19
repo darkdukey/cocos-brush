@@ -6,6 +6,7 @@ import MultiStrokeBrush from "./brush/MultiStrokeBrush";
 import SlicedBrush from "./brush/SlicedBrush";
 import SlicedFadingBrush from "./brush/SlicedFadingBrush";
 import SketchyBrush from "./brush/SketchyBrush";
+import FurBrush from "./brush/FurBrush";
 
 const {ccclass, property} = cc._decorator;
 
@@ -16,7 +17,8 @@ enum BrushType {
     MultiStroke,
     Sliced,
     SlicedFading,
-    Sketchy
+    Sketchy,
+    Fur
 }
 
 @ccclass
@@ -59,6 +61,10 @@ export default class DrawingCanvas extends cc.Component {
             }
             case BrushType.Sketchy: {
                 this.brush = new SketchyBrush();
+                break;
+            }
+            case BrushType.Fur: {
+                this.brush = new FurBrush();
                 break;
             }
         }
