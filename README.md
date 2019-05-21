@@ -11,7 +11,7 @@ A Sample project demostrating how to use cc.Graphics as a brush to draw customiz
 
 ## Demo
 
-<div style='position:relative; padding-bottom:calc(69.18% + 44px)'><iframe src='https://gfycat.com/ifr/MadFavorableCurlew' frameborder='0' scrolling='no' width='100%' height='100%' style='position:absolute;top:0;left:0;' allowfullscreen></iframe></div>
+![](docs/imgs/sample_drawing.gif)
 
 ## Reference 
 http://perfectionkills.com/exploring-canvas-drawing-techniques/
